@@ -1,0 +1,28 @@
+# C / C++
+
+## Object files
+*.o
+*.obj
+*.elf
+
+## Libraries
+*.a
+*.lib
+*.la
+*.lo
+
+## Shared objects
+*.dll
+*.so
+*.so.*
+
+## Executables
+*.exe
+*.out
+
+
+## Python
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
