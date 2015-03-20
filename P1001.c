@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define bubble(x) temp = (x)[m+1]; (x)[m+1] = (x)[m]; (x)[m] = temp;
+#define bubble(p) { temp = (p)[1]; (p)[1] = *(p); *(p)++ = temp; }
 
 
 void
@@ -26,7 +26,7 @@ show_status(long *min, long *max, int k)
 int
 main(void)
 {
-    int m, n, k;
+    int n, k;
     scanf("%d %d", &n, &k);
     long *p1, *p2, temp;
     long *min = (long *)calloc(k + 1, sizeof(long));
@@ -39,12 +39,12 @@ main(void)
         *(p1 = min) = *(p2 = max);
         show_status(min, max, k);
 
-        for (m = 0; m < k && min[m] < min[m+1]; m++) {
-            bubble(min);
+        while (p1 < min + k && p1[0] < p1[1]) {
+            bubble(p1);
         }
 
-        for (m=0; m < k && max[m] > max[m+1]; m++) {
-            bubble(max);
+        while (p2 < max + k && p2[0] > p2[1]) {
+            bubble(p2);
         }
         show_status(min, max, k);
     }
