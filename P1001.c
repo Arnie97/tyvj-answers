@@ -1,25 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <tgmath.h>
 
 #define bubble(p) { temp = (p)[1]; (p)[1] = *(p); *(p)++ = temp; }
 
 
-void
-show_status(long *min, long *max, int k)
+int
+isprime(long number)
 {
-    int s;
-
-    for (s = 0; s <= k; s++) {
-        printf("%d ", min[s]);
+    if (number < 2) {
+        return 0;
     }
-    putchar('\n');
+    long max_factor = sqrt(number) + 1;
 
-    for (s = 0; s <= k; s++) {
-        printf("%d ", max[s]);
+    for (long i = 2; i <= max_factor; i++) {
+        if (number % i == 0) {
+            return 0;
+        }
     }
-    putchar('\n');
-    putchar('\n');
+    return 1;
 }
 
 
@@ -33,11 +33,9 @@ main(void)
     long *max = (long *)calloc(k + 1, sizeof(long));
     memset(min, 0x7F, (k + 1) * sizeof(long));
 
-    show_status(min, max, k);
     for (int i = 0; i < n; i++) {
         scanf("%ld", max);
         *(p1 = min) = *(p2 = max);
-        show_status(min, max, k);
 
         while (p1 < min + k && p1[0] < p1[1]) {
             bubble(p1);
@@ -46,11 +44,10 @@ main(void)
         while (p2 < max + k && p2[0] > p2[1]) {
             bubble(p2);
         }
-        show_status(min, max, k);
     }
 
     temp = max[1] - min[1];
-    printf("%d", temp);
+    printf("%s\n%d\n", isprime(temp)? "YES": "NO", temp);
     free(min);
     free(max);
     return 0;
