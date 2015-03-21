@@ -2,23 +2,31 @@
 
 int main(void)
 {
-    int n, k, k10 = 1, f = 1;
+    int n, k;
+    unsigned long long k10 = 1, f = 1;
     scanf("%d %d", &n, &k);
 
-    for (int i = 0; i < k; i++) {
+    for (int i = 0; i <= k; i++) {
         k10 *= 10;
     }
 
-    for (int i = 1; i <= n; i++) {
+    char truncated = 0;
+    for (int i = 2; i <= n; i++) {
         f *= i;
-        if (f % 10 == 0) {
+        if (i % 5 == 0) {
             f /= 10;
         }
         if (f > k10) {
             f %= k10;
+            truncated++;
         }
     }
 
-    printf("%0*d\n", k, f);
+    f %= (k10 / 10);
+    if (truncated) {
+        printf("%0*lld\n", k, f);
+    } else {
+        printf("%lld", f);
+    }
     return 0;
 }
