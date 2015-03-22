@@ -15,7 +15,7 @@ main(void)
     int max_pos = 0, sum = 0, carry = 0;
     for (char *p = input; *p != '\0'; p++) {
         if (*p == '+') {
-            for (int i = 0; i <= max_pos + 1; i++) {
+            for (int i = 1; i <= max_pos + 2; i++) {
                 carry += this[max_pos - i] + output[i];
                 if (carry > 9) {
                     sum = carry % 10;
@@ -35,7 +35,7 @@ main(void)
     zero_pos = 1;
     for (int i = 1500; i > 0; i--) {
         if (!zero_pos) {
-            printf("%c", output[i] + '0');
+            putchar(output[i] + '0');
         } else if (output[i]) {
             zero_pos = 0;
             i++;
