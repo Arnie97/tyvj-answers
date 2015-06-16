@@ -6,10 +6,10 @@ int isprime(int n):
     if n < 2:
         return 0
     char factors[5] = {2, 3, 5, 7, 0}
-    for char *ptr = factors; ptr; ptr++:
+    for char *ptr = factors; *ptr; ptr++:
         if n == *ptr:
             return 1
-        elif n % *ptr:
+        elif n % *ptr == 0:
             return 0
     return 1
 
