@@ -9,7 +9,7 @@
 int priority(char x):
     switch:
         x
-    case '#':
+    case '#', '(':
         return 0
     case '+', '-':
         return 1
@@ -17,6 +17,8 @@ int priority(char x):
         return 2
     case '^':
         return 3
+    default:
+        return -1
 
 
 int *calculate(char op_type, int *op1, int *op2):
@@ -41,15 +43,17 @@ int *calculate(char op_type, int *op1, int *op2):
 
 
 int substr_to_int(char *str, int head, int tail):
-    if head >= tail:
-        return -1
+    char negative = 0
+    if str[head] == '-':
+        negative = 1
+        head++
 
     int magnitude = 1, sum = 0
     for int i = tail - 1; i >= head; i--:
         sum += (str[i] - '0') * magnitude
         magnitude *= 10
     dprintf(("mov \"%s\"[%d:%d] = %d\n", str, head, tail, sum))
-    return sum
+    return negative? -sum: sum
 
 
 int main(void):
@@ -65,16 +69,16 @@ int main(void):
         elif isdigit(input[i]):
             tail++
             continue
-        else:
-            int n = substr_to_int(input, head, tail)
-            if n >= 0:
-                num[num_count++] = n
-            head = tail = i + 1
+        elif head < tail:
+            num[num_count++] = substr_to_int(input, head, tail)
+        head = tail = i + 1
 
         if input[i] == '(':
             nested++
         elif input[i] == ')':
             nested--
+        elif input[i] == '-' && priority(input[i-1]) > 0:
+            head--
         elif (i == len || sym_n[sym_count] == nested && priority(sym[sym_count]) >= priority(input[i]) || sym_n[sym_count] > nested):
             num_count--
             calculate(sym[sym_count--], num + num_count - 1, num + num_count)
