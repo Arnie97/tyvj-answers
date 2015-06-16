@@ -32,11 +32,15 @@ int main(void):
     traveled = (int *)traveled_array
     memset(traveled, 0, sizeof(traveled_array))
 
-    int max = 0, r_max, c_max
     for int r = 0; r < r_bound; r++:
         for int c = 0; c < c_bound; c++:
             scanf("%d", &_(data, r, c))
-            if _(data, r, c) > max:
-                max = _(data, r_max = r, c_max = c)
-    printf("%d\n", dfs(r_max, c_max))
+
+    int max = 0
+    for int r = 0; r < r_bound; r++:
+        for int c = 0; c < c_bound; c++:
+            if max < dfs(r, c):
+                max = dfs(r, c)
+
+    printf("%d\n", max)
     return 0
