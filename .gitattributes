@@ -1,1 +1,4 @@
 *	text eol=lf
+*.c.k	linguist-language=c
+*.cpp.k	linguist-language=c++
+*.in	linguist-language=pure-data
