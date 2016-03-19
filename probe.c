@@ -4,11 +4,25 @@
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
+struct osversioninfoex {
+    DWORD dwOSVersionInfoSize;
+    DWORD dwMajorVersion;
+    DWORD dwMinorVersion;
+    DWORD dwBuildNumber;
+    DWORD dwPlatformId;
+    TCHAR szCSDVersion[128];
+    WORD wServicePackMajor;
+    WORD wServicePackMinor;
+    WORD wSuiteMask;
+    BYTE wProductType;
+    BYTE wReserved;
+};
+
 void os_info()
 {
-    OSVERSIONINFOEX ver;
-    ver.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
-    if (GetVersionEx(&ver)) {
+    struct osversioninfoex ver;
+    ver.dwOSVersionInfoSize = sizeof(ver);
+    if (GetVersionEx((void *)&ver)) {
         char *product_types[] = {
             "Unknown", "Workstation", "Domain Controller", "Server"
         };
