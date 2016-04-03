@@ -17,8 +17,7 @@ int main():
     int count = 0, n
     cin >> n
     n -= 2 + 2  // '+', '='
-    int range = pow(10, n / digits[1] / 2 + 1)
-    for int a = 0; a < range; a++:
+    for int a = 0; a < 1111; a++:
         for int b = 0; b <= a; b++:
             if cost(a) + cost(b) + cost(a + b) == n:
                 count += (a != b? 2: 1)  // a + b = c, b + a = c; a + a = c
