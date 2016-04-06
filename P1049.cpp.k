@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#define imax(a, b) ((a) = (a) > (b)? (a): (b))
 using namespace std
 
 int main():
@@ -12,8 +13,8 @@ int main():
         cin >> data[i]
         for int j = 0; j < i; j++:
             if data[j] <= data[i]:
-                dp[i] = max(dp[i], dp[j] + 1)
-        m = max(m, dp[i])
+                imax(dp[i], dp[j] + 1)
+        imax(m, dp[i])
 
     cout << m << endl
     return 0
